@@ -56,8 +56,8 @@ const PointsDisplay = () => {
               <div className="opacity-90">+20-100 點數</div>
             </div>
             <div className="bg-white/10 rounded-lg p-3">
-              <div className="font-semibold">準時歸還</div>
-              <div className="opacity-90">+10 點數</div>
+              <div className="font-semibold">使用評價</div>
+              <div className="opacity-90">+15 點數</div>
             </div>
             <div className="bg-white/10 rounded-lg p-3">
               <div className="font-semibold">鄰居推薦</div>

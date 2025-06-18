@@ -21,7 +21,8 @@ const MapPage = () => {
       rating: 4.8,
       owner: "王小明",
       ownerRating: 4.9,
-      description: "Bosch電動螺絲起子，適合家具組裝"
+      description: "Bosch電動螺絲起子，適合家具組裝",
+      locationLatLng: [24.9575, 121.2417],
     },
     {
       id: 2,
@@ -33,7 +34,8 @@ const MapPage = () => {
       rating: 4.9,
       owner: "李小華",
       ownerRating: 5.0,
-      description: "飛利浦氣炸鍋，九成新，容量3.5L"
+      description: "飛利浦氣炸鍋，九成新，容量3.5L",
+      locationLatLng: [24.9577, 121.2419],
     },
     {
       id: 3,
@@ -45,7 +47,8 @@ const MapPage = () => {
       rating: 4.7,
       owner: "陳美美",
       ownerRating: 4.8,
-      description: "專業瑜伽墊，厚度6mm，防滑材質"
+      description: "專業瑜伽墊，厚度6mm，防滑材質",
+      locationLatLng: [24.9579, 121.2421],
     },
     {
       id: 4,
@@ -57,7 +60,8 @@ const MapPage = () => {
       rating: 4.6,
       owner: "張大哥",
       ownerRating: 4.7,
-      description: "國際牌除濕機，適合10坪空間"
+      description: "國際牌除濕機，適合10坪空間",
+      locationLatLng: [24.9581, 121.2423],
     },
     {
       id: 5,
@@ -69,7 +73,8 @@ const MapPage = () => {
       rating: 4.9,
       owner: "林小姐",
       ownerRating: 4.8,
-      description: "BenQ投影機，適合家庭電影院"
+      description: "BenQ投影機，適合家庭電影院",
+      locationLatLng: [24.9583, 121.2425],
     },
     {
       id: 6,
@@ -81,7 +86,8 @@ const MapPage = () => {
       rating: 4.5,
       owner: "陳先生",
       ownerRating: 4.6,
-      description: "4人帳篷，防水材質，適合露營"
+      description: "4人帳篷，防水材質，適合露營",
+      locationLatLng: [24.9585, 121.2427],
     },
     {
       id: 7,
@@ -93,7 +99,8 @@ const MapPage = () => {
       rating: 4.7,
       owner: "黃先生",
       ownerRating: 4.9,
-      description: "捷安特電動腳踏車，續航力50公里"
+      description: "捷安特電動腳踏車，續航力50公里",
+      locationLatLng: [24.9587, 121.2429],
     },
     {
       id: 8,
@@ -105,7 +112,8 @@ const MapPage = () => {
       rating: 4.8,
       owner: "吳小姐",
       ownerRating: 4.7,
-      description: "義式咖啡機，可製作拿鐵、卡布奇諾"
+      description: "義式咖啡機，可製作拿鐵、卡布奇諾",
+      locationLatLng: [24.9589, 121.2431],
     },
     {
       id: 9,
@@ -117,7 +125,8 @@ const MapPage = () => {
       rating: 4.6,
       owner: "劉先生",
       ownerRating: 4.8,
-      description: "啞鈴、瑜珈球、彈力帶組合"
+      description: "啞鈴、瑜珈球、彈力帶組合",
+      locationLatLng: [24.9591, 121.2433],
     },
     {
       id: 10,
@@ -129,7 +138,8 @@ const MapPage = () => {
       rating: 4.9,
       owner: "楊小姐",
       ownerRating: 4.9,
-      description: "小米掃地機器人，智能規劃路線"
+      description: "小米掃地機器人，智能規劃路線",
+      locationLatLng: [24.9593, 121.2435],
     },
     {
       id: 11,
@@ -141,7 +151,8 @@ const MapPage = () => {
       rating: 4.8,
       owner: "周先生",
       ownerRating: 4.7,
-      description: "Canon相機、三腳架、閃光燈"
+      description: "Canon相機、三腳架、閃光燈",
+      locationLatLng: [24.9595, 121.2437],
     },
     {
       id: 12,
@@ -153,7 +164,8 @@ const MapPage = () => {
       rating: 4.4,
       owner: "鄭先生",
       ownerRating: 4.5,
-      description: "大型烤肉架，適合家庭聚會"
+      description: "大型烤肉架，適合家庭聚會",
+      locationLatLng: [24.9597, 121.2439],
     }
   ];
 

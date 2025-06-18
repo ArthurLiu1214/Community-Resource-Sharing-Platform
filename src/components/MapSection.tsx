@@ -141,11 +141,6 @@ const MapSection: React.FC<MapSectionProps> = ({ items }) => {
 
   return (
     <section className="mb-12">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-        <Map size={24} />
-        社區地圖
-      </h2>
-      
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
         {/* 地圖容器 */}
         <div className="relative h-96">

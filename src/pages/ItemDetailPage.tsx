@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Star, Map, ArrowLeft, User, Shield, Calendar, Package } from 'lucide-react';
+import { Star, Map, ArrowLeft, User, Shield, Calendar, Package, MapPin } from 'lucide-react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button } from '../components/ui/button';
@@ -10,6 +12,9 @@ const ItemDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [item, setItem] = useState<any>(null);
+  const [showLocation, setShowLocation] = useState(false);
+  // 假設每個物品有一個經緯度，這裡用範例座標
+  const itemPosition = item && item.locationLatLng ? item.locationLatLng : [24.9575, 121.2417];
 
   // 完整的物品資料庫
   const itemsDatabase = {
@@ -30,7 +35,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-3天",
       deposit: 500,
       ownerLocation: "中原大學正門附近",
-      ownerJoinDate: "2023年3月"
+      ownerJoinDate: "2023年3月",
+      locationLatLng: [24.9575, 121.2417],
     },
     2: {
       id: 2,
@@ -49,7 +55,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-7天",
       deposit: 800,
       ownerLocation: "中原夜市附近",
-      ownerJoinDate: "2023年1月"
+      ownerJoinDate: "2023年1月",
+      locationLatLng: [24.9577, 121.2419],
     },
     3: {
       id: 3,
@@ -68,7 +75,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-14天",
       deposit: 200,
       ownerLocation: "中原大學體育館附近",
-      ownerJoinDate: "2023年6月"
+      ownerJoinDate: "2023年6月",
+      locationLatLng: [24.9579, 121.2421],
     },
     4: {
       id: 4,
@@ -87,7 +95,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-30天",
       deposit: 1200,
       ownerLocation: "中原商圈",
-      ownerJoinDate: "2022年11月"
+      ownerJoinDate: "2022年11月",
+      locationLatLng: [24.9581, 121.2423],
     },
     5: {
       id: 5,
@@ -106,7 +115,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-7天",
       deposit: 2000,
       ownerLocation: "中原大學圖書館附近",
-      ownerJoinDate: "2023年4月"
+      ownerJoinDate: "2023年4月",
+      locationLatLng: [24.9583, 121.2425],
     },
     6: {
       id: 6,
@@ -125,7 +135,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-14天",
       deposit: 800,
       ownerLocation: "中原大學後山附近",
-      ownerJoinDate: "2023年2月"
+      ownerJoinDate: "2023年2月",
+      locationLatLng: [24.9585, 121.2427],
     },
     7: {
       id: 7,
@@ -144,7 +155,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-7天",
       deposit: 3000,
       ownerLocation: "中原大學側門附近",
-      ownerJoinDate: "2022年8月"
+      ownerJoinDate: "2022年8月",
+      locationLatLng: [24.9587, 121.2429],
     },
     8: {
       id: 8,
@@ -163,7 +175,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-7天",
       deposit: 1000,
       ownerLocation: "中原大學宿舍區",
-      ownerJoinDate: "2023年5月"
+      ownerJoinDate: "2023年5月",
+      locationLatLng: [24.9589, 121.2431],
     },
     9: {
       id: 9,
@@ -182,7 +195,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-30天",
       deposit: 1500,
       ownerLocation: "中原大學操場附近",
-      ownerJoinDate: "2023年1月"
+      ownerJoinDate: "2023年1月",
+      locationLatLng: [24.9591, 121.2433],
     },
     10: {
       id: 10,
@@ -201,7 +215,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-7天",
       deposit: 1500,
       ownerLocation: "中原大學工學院附近",
-      ownerJoinDate: "2023年3月"
+      ownerJoinDate: "2023年3月",
+      locationLatLng: [24.9593, 121.2435],
     },
     11: {
       id: 11,
@@ -220,7 +235,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-7天",
       deposit: 5000,
       ownerLocation: "中原大學商學院附近",
-      ownerJoinDate: "2022年12月"
+      ownerJoinDate: "2022年12月",
+      locationLatLng: [24.9595, 121.2437],
     },
     12: {
       id: 12,
@@ -239,7 +255,8 @@ const ItemDetailPage = () => {
       borrowDuration: "1-3天",
       deposit: 500,
       ownerLocation: "中原大學後山附近",
-      ownerJoinDate: "2022年10月"
+      ownerJoinDate: "2022年10月",
+      locationLatLng: [24.9597, 121.2439],
     }
   };
 
@@ -272,107 +289,140 @@ const ItemDetailPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex flex-col">
       <Navbar />
-      
       <div className="container mx-auto px-4 py-8 flex-1">
-        <div className="max-w-4xl mx-auto">
-          <Button 
-            onClick={() => navigate(-1)}
-            className="mb-6 flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700"
-          >
-            <ArrowLeft size={20} />
-            返回
-          </Button>
-
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-            {/* 物品圖片 */}
-            <div className="relative h-96 bg-white">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* 左側主卡片 */}
+          <div className="lg:col-span-2 bg-white rounded-2xl shadow flex flex-col overflow-hidden">
+            <Button 
+              onClick={() => navigate(-1)}
+              className="m-4 w-fit flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700"
+            >
+              <ArrowLeft size={20} />
+              返回
+            </Button>
+            {/* 圖片區塊 */}
+            <div className="relative bg-white flex items-center justify-center h-80">
               <img 
                 src={item.image} 
                 alt={item.title} 
-                className="w-full h-full object-contain"
+                className="object-contain max-h-72 w-full"
               />
-              <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                {item.category}
-              </div>
+              <span className="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">{item.category}</span>
+              <span className="absolute top-3 right-3 bg-white/90 text-gray-700 px-3 py-1 rounded-full text-xs font-semibold shadow">{item.distance}</span>
             </div>
-
-            <div className="p-6">
-              {/* 物品標題和評分 */}
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h1 className="text-3xl font-bold text-gray-800 mb-2">{item.title}</h1>
-                  <p className="text-gray-600 text-lg">{item.description}</p>
-                </div>
-                <div className="text-right">
-                  <div className="flex items-center gap-1 mb-1">
-                    <Star size={20} className="text-yellow-500 fill-current" />
-                    <span className="text-xl font-bold text-gray-800">{item.rating}</span>
-                  </div>
-                  <p className="text-sm text-gray-600">({item.ownerRating}/100 擁有者評分)</p>
-                </div>
-              </div>
-
-              {/* 物品資訊 */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <Map size={16} className="text-gray-500" />
-                    <span className="text-gray-700">{item.distance} • {item.ownerLocation}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Package size={16} className="text-gray-500" />
-                    <span className="text-gray-700">最長借用 {item.borrowDuration}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar size={16} className="text-gray-500" />
-                    <span className="text-gray-700">押金 ${item.deposit}</span>
+            {/* 下方白底主內容 */}
+            <div className="bg-white p-5 flex flex-col gap-2 flex-1 justify-between">
+              <div>
+                <div className="flex items-center mb-2">
+                  <h1 className="text-2xl font-bold text-gray-900 flex-1">{item.title}</h1>
+                  <div className="flex items-center gap-1 text-yellow-500 text-base font-semibold">
+                    <Star size={18} className="inline-block" />
+                    <span className="text-gray-800 font-bold">{item.rating}</span>
+                    <span className="text-xs text-gray-500 ml-1">物品評分</span>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <User size={16} className="text-gray-500" />
-                    <span className="text-gray-700">擁有者：{item.owner}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Shield size={16} className="text-gray-500" />
-                    <span className="text-gray-700">信譽分數：{item.ownerRating}/100</span>
-                  </div>
+                <div className="text-gray-600 mb-1 text-sm">{item.description}</div>
+                <div className="flex flex-wrap gap-4 text-xs text-gray-700 mb-2">
+                  <span>狀況：{item.condition}</span>
+                  <span>可借用：{item.borrowDuration}</span>
                 </div>
               </div>
-
-              {/* 借用按鈕 */}
-              <div className="border-t pt-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="text-2xl font-bold text-green-600">{item.points} 點數</div>
-                  <Button 
-                    onClick={handleBorrow}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-lg font-semibold rounded-lg transition-colors"
-                  >
-                    立即借用
-                  </Button>
-                </div>
+              {/* 詳細說明區塊 */}
+              <div className="bg-white rounded-2xl border border-gray-100 p-4 mt-0">
+                <h2 className="text-base font-bold text-gray-800 mb-2">詳細說明</h2>
+                <div className="text-gray-700 text-sm whitespace-pre-line">{item.fullDescription}</div>
               </div>
             </div>
           </div>
 
-          {/* 可用日期 */}
-          <div className="bg-white rounded-xl shadow-lg p-6 mt-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">可用日期</h3>
-            <div className="grid grid-cols-7 gap-2">
-              {item.availableDates.map(date => (
-                <span 
-                  key={date} 
-                  className="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm text-center"
-                >
-                  {date}
-                </span>
-              ))}
+          {/* 右側三卡片 */}
+          <div className="flex flex-col gap-4">
+            {/* 物主信息卡 */}
+            <div className="bg-white rounded-2xl shadow p-4">
+              <h2 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2"><User size={18}/>物主信息</h2>
+              <div className="flex items-center gap-4 mb-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-400 to-blue-400 flex items-center justify-center text-white text-lg font-bold">
+                  {item.owner[0]}
+                </div>
+                <div className="space-y-2">
+                  <div className="font-semibold text-gray-800 text-sm">{item.owner}</div>
+                  <div className="text-xs text-gray-500 flex items-center gap-1"><Shield size={12}/> 信譽分數：{item.ownerRating}/100</div>
+                  <div className="text-xs text-gray-500">加入時間：{item.ownerJoinDate}</div>
+                  <div className="text-xs text-gray-500 flex items-center gap-1">
+                    位置：{item.ownerLocation}
+                    <button onClick={() => setShowLocation(true)} title="查看地圖">
+                      <MapPin size={16} className="text-blue-500 hover:text-blue-700 transition-colors" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-2">
+                <div className="text-xs text-gray-600 mb-1">信譽評分</div>
+                <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="h-2 bg-green-500 rounded-full" style={{ width: `${item.ownerRating}%` }}></div>
+                </div>
+                <div className="text-xs text-gray-500 mt-1">{item.ownerRating >= 90 ? '優質等級' : item.ownerRating >= 70 ? '中等等級' : '低等等級'}</div>
+              </div>
+            </div>
+            {/* 借用選項卡 */}
+            <div className="bg-white rounded-2xl shadow p-4 flex flex-col h-full min-h-[320px] justify-between">
+              <div>
+                <h2 className="text-base font-bold text-gray-800 mb-3">借用選項</h2>
+                <div className="mb-2 text-xs text-gray-700">可借用日期</div>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {item.availableDates.map(date => (
+                    <span 
+                      key={date} 
+                      className="bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs text-center"
+                    >
+                      {date}
+                    </span>
+                  ))}
+                </div>
+                {/* 藍底點數卡片 */}
+                <div className="flex items-center justify-between bg-blue-50 rounded-xl px-4 py-3 mb-4">
+                  <div className="text-xl font-bold text-blue-700">{item.points} 點數</div>
+                  <span className="text-xs text-gray-500 ml-2">所需花費</span>
+                </div>
+                {/* 押金資訊 */}
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4 text-xs text-yellow-800">
+                  押金資訊<br/>需支付押金 <span className="font-bold">${item.deposit}</span>，歸還時退還
+                </div>
+              </div>
+              <Button 
+                onClick={handleBorrow}
+                className="w-full bg-green-600 hover:bg-green-700 text-white py-2 text-base font-semibold rounded-lg transition-colors mt-auto"
+              >
+                申請借用
+              </Button>
             </div>
           </div>
         </div>
       </div>
-
       <Footer />
+      {/* 位置地圖彈窗 */}
+      {showLocation && (
+        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-lg p-6 min-w-[320px] text-center relative">
+            <button className="absolute top-2 right-2 text-gray-400 hover:text-gray-600" onClick={() => setShowLocation(false)}>&times;</button>
+            <div className="text-lg font-bold text-gray-800 mb-2 flex items-center justify-center gap-2">
+              <MapPin size={20} className="text-blue-500" />物品位置地圖
+            </div>
+            <div className="mb-2 text-gray-700">{item.ownerLocation}</div>
+            <div className="w-full h-64">
+              <MapContainer center={itemPosition} zoom={16} style={{ height: '100%', width: '100%' }}>
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={itemPosition}>
+                  <Popup>物品位置</Popup>
+                </Marker>
+              </MapContainer>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
