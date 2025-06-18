@@ -1,26 +1,168 @@
-
 import React, { useState } from 'react';
 import { Search, Filter, MapPin, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import CategoryFilter from '../components/CategoryFilter';
+import MapSection from '../components/MapSection';
 
 const MapPage = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
-  // 模擬地圖上的物品標記
-  const mapItems = [
-    { id: 1, title: "電動螺絲起子", category: "工具", lat: 25.0330, lng: 121.5654, points: 30, rating: 4.8, distance: "0.2km" },
-    { id: 2, title: "氣炸鍋", category: "廚具", lat: 25.0340, lng: 121.5644, points: 50, rating: 4.9, distance: "0.5km" },
-    { id: 3, title: "瑜伽墊", category: "運動用品", lat: 25.0320, lng: 121.5664, points: 15, rating: 4.7, distance: "0.3km" },
-    { id: 4, title: "除濕機", category: "家電", lat: 25.0350, lng: 121.5634, points: 80, rating: 4.6, distance: "0.8km" }
+  // 完整的物品資料（與首頁相同）
+  const mockItems = [
+    {
+      id: 1,
+      title: "電動螺絲起子",
+      category: "工具",
+      image: "/placeholder.svg",
+      distance: "0.2km",
+      points: 30,
+      rating: 4.8,
+      owner: "王小明",
+      ownerRating: 4.9,
+      description: "Bosch電動螺絲起子，適合家具組裝"
+    },
+    {
+      id: 2,
+      title: "氣炸鍋",
+      category: "廚具",
+      image: "/placeholder.svg",
+      distance: "0.5km",
+      points: 50,
+      rating: 4.9,
+      owner: "李小華",
+      ownerRating: 5.0,
+      description: "飛利浦氣炸鍋，九成新，容量3.5L"
+    },
+    {
+      id: 3,
+      title: "瑜伽墊",
+      category: "運動用品",
+      image: "/placeholder.svg",
+      distance: "0.3km",
+      points: 15,
+      rating: 4.7,
+      owner: "陳美美",
+      ownerRating: 4.8,
+      description: "專業瑜伽墊，厚度6mm，防滑材質"
+    },
+    {
+      id: 4,
+      title: "除濕機",
+      category: "家電",
+      image: "/placeholder.svg",
+      distance: "0.8km",
+      points: 80,
+      rating: 4.6,
+      owner: "張大哥",
+      ownerRating: 4.7,
+      description: "國際牌除濕機，適合10坪空間"
+    },
+    {
+      id: 5,
+      title: "投影機",
+      category: "電子設備",
+      image: "/placeholder.svg",
+      distance: "0.4km",
+      points: 120,
+      rating: 4.9,
+      owner: "林小姐",
+      ownerRating: 4.8,
+      description: "BenQ投影機，適合家庭電影院"
+    },
+    {
+      id: 6,
+      title: "露營帳篷",
+      category: "戶外用品",
+      image: "/placeholder.svg",
+      distance: "0.6km",
+      points: 90,
+      rating: 4.5,
+      owner: "陳先生",
+      ownerRating: 4.6,
+      description: "4人帳篷，防水材質，適合露營"
+    },
+    {
+      id: 7,
+      title: "電動腳踏車",
+      category: "交通工具",
+      image: "/placeholder.svg",
+      distance: "0.7km",
+      points: 200,
+      rating: 4.7,
+      owner: "黃先生",
+      ownerRating: 4.9,
+      description: "捷安特電動腳踏車，續航力50公里"
+    },
+    {
+      id: 8,
+      title: "咖啡機",
+      category: "廚具",
+      image: "/placeholder.svg",
+      distance: "0.3km",
+      points: 60,
+      rating: 4.8,
+      owner: "吳小姐",
+      ownerRating: 4.7,
+      description: "義式咖啡機，可製作拿鐵、卡布奇諾"
+    },
+    {
+      id: 9,
+      title: "健身器材組合",
+      category: "運動用品",
+      image: "/placeholder.svg",
+      distance: "0.9km",
+      points: 150,
+      rating: 4.6,
+      owner: "劉先生",
+      ownerRating: 4.8,
+      description: "啞鈴、瑜珈球、彈力帶組合"
+    },
+    {
+      id: 10,
+      title: "掃地機器人",
+      category: "家電",
+      image: "/placeholder.svg",
+      distance: "0.5km",
+      points: 100,
+      rating: 4.9,
+      owner: "楊小姐",
+      ownerRating: 4.9,
+      description: "小米掃地機器人，智能規劃路線"
+    },
+    {
+      id: 11,
+      title: "攝影器材",
+      category: "電子設備",
+      image: "/placeholder.svg",
+      distance: "0.4km",
+      points: 180,
+      rating: 4.8,
+      owner: "周先生",
+      ownerRating: 4.7,
+      description: "Canon相機、三腳架、閃光燈"
+    },
+    {
+      id: 12,
+      title: "烤肉架",
+      category: "戶外用品",
+      image: "/placeholder.svg",
+      distance: "0.6km",
+      points: 40,
+      rating: 4.4,
+      owner: "鄭先生",
+      ownerRating: 4.5,
+      description: "大型烤肉架，適合家庭聚會"
+    }
   ];
 
-  const handleItemClick = (itemId: number) => {
-    navigate(`/item/${itemId}`);
-  };
+  const filteredItems = mockItems.filter(item => {
+    const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
+    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
@@ -54,33 +196,14 @@ const MapPage = () => {
 
         <CategoryFilter activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
 
-        {/* Map Container */}
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-6">
-          <div className="h-96 bg-gradient-to-br from-green-100 to-blue-100 flex items-center justify-center relative">
-            <div className="text-center">
-              <MapPin size={48} className="text-green-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">互動式地圖</h3>
-              <p className="text-gray-600">這裡將整合Google Maps API顯示實際地圖</p>
-            </div>
-            
-            {/* 模擬地圖標記 */}
-            <div className="absolute top-1/4 left-1/3 bg-red-500 text-white px-2 py-1 rounded-full text-xs">
-              電動螺絲起子 (30點數)
-            </div>
-            <div className="absolute top-1/2 right-1/3 bg-blue-500 text-white px-2 py-1 rounded-full text-xs">
-              氣炸鍋 (50點數)
-            </div>
-            <div className="absolute bottom-1/3 left-1/4 bg-purple-500 text-white px-2 py-1 rounded-full text-xs">
-              瑜伽墊 (15點數)
-            </div>
-          </div>
-        </div>
+        {/* 使用與首頁相同的地圖組件 */}
+        <MapSection items={mockItems} />
 
         {/* Item List */}
         <div className="bg-white rounded-xl shadow-lg p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">地圖上的物品</h2>
+          <h2 className="text-xl font-bold text-gray-800 mb-4">地圖上的物品 ({filteredItems.length})</h2>
           <div className="space-y-4">
-            {mapItems.map(item => (
+            {filteredItems.map(item => (
               <div key={item.id} className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
                 <div className="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
                   <MapPin size={20} className="text-gray-600" />
@@ -95,7 +218,7 @@ const MapPage = () => {
                   </div>
                 </div>
                 <button 
-                  onClick={() => handleItemClick(item.id)}
+                  onClick={() => navigate(`/item/${item.id}`)}
                   className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                 >
                   查看詳情

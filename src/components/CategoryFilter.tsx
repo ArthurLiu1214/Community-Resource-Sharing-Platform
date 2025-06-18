@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface CategoryFilterProps {
@@ -12,9 +11,9 @@ const categories = [
   { id: '廚具', name: '廚具', emoji: '🍳' },
   { id: '家電', name: '家電', emoji: '📺' },
   { id: '運動用品', name: '運動用品', emoji: '⚽' },
-  { id: '書籍', name: '書籍', emoji: '📚' },
-  { id: '樂器', name: '樂器', emoji: '🎸' },
-  { id: '其他', name: '其他', emoji: '📦' }
+  { id: '電子設備', name: '電子設備', emoji: '💻' },
+  { id: '戶外用品', name: '戶外用品', emoji: '🏕️' },
+  { id: '交通工具', name: '交通工具', emoji: '🚲' }
 ];
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({ activeCategory, onCategoryChange }) => {

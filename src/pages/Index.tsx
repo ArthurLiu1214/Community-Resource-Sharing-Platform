@@ -61,6 +61,102 @@ const Index = () => {
       owner: "張大哥",
       ownerRating: 4.7,
       description: "國際牌除濕機，適合10坪空間"
+    },
+    {
+      id: 5,
+      title: "投影機",
+      category: "電子設備",
+      image: "/placeholder.svg",
+      distance: "0.4km",
+      points: 120,
+      rating: 4.9,
+      owner: "林小姐",
+      ownerRating: 4.8,
+      description: "BenQ投影機，適合家庭電影院"
+    },
+    {
+      id: 6,
+      title: "露營帳篷",
+      category: "戶外用品",
+      image: "/placeholder.svg",
+      distance: "0.6km",
+      points: 90,
+      rating: 4.5,
+      owner: "陳先生",
+      ownerRating: 4.6,
+      description: "4人帳篷，防水材質，適合露營"
+    },
+    {
+      id: 7,
+      title: "電動腳踏車",
+      category: "交通工具",
+      image: "/placeholder.svg",
+      distance: "0.7km",
+      points: 200,
+      rating: 4.7,
+      owner: "黃先生",
+      ownerRating: 4.9,
+      description: "捷安特電動腳踏車，續航力50公里"
+    },
+    {
+      id: 8,
+      title: "咖啡機",
+      category: "廚具",
+      image: "/placeholder.svg",
+      distance: "0.3km",
+      points: 60,
+      rating: 4.8,
+      owner: "吳小姐",
+      ownerRating: 4.7,
+      description: "義式咖啡機，可製作拿鐵、卡布奇諾"
+    },
+    {
+      id: 9,
+      title: "健身器材組合",
+      category: "運動用品",
+      image: "/placeholder.svg",
+      distance: "0.9km",
+      points: 150,
+      rating: 4.6,
+      owner: "劉先生",
+      ownerRating: 4.8,
+      description: "啞鈴、瑜珈球、彈力帶組合"
+    },
+    {
+      id: 10,
+      title: "掃地機器人",
+      category: "家電",
+      image: "/placeholder.svg",
+      distance: "0.5km",
+      points: 100,
+      rating: 4.9,
+      owner: "楊小姐",
+      ownerRating: 4.9,
+      description: "小米掃地機器人，智能規劃路線"
+    },
+    {
+      id: 11,
+      title: "攝影器材",
+      category: "電子設備",
+      image: "/placeholder.svg",
+      distance: "0.4km",
+      points: 180,
+      rating: 4.8,
+      owner: "周先生",
+      ownerRating: 4.7,
+      description: "Canon相機、三腳架、閃光燈"
+    },
+    {
+      id: 12,
+      title: "烤肉架",
+      category: "戶外用品",
+      image: "/placeholder.svg",
+      distance: "0.6km",
+      points: 40,
+      rating: 4.4,
+      owner: "鄭先生",
+      ownerRating: 4.5,
+      description: "大型烤肉架，適合家庭聚會"
     }
   ];
 
@@ -94,7 +190,7 @@ const Index = () => {
                 className="w-full pl-10 pr-4 py-3 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-2 focus:ring-white/50"
               />
             </div>
-            <Link to="/list-item" className="bg-yellow-500 hover:bg-yellow-600 text-gray-800 px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
+            <Link to="/list-item" className="bg-yellow-500 hover:bg-yellow-600 text-gray-800 px-6 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2 whitespace-nowrap">
               <PlusCircle size={20} />
               上架物品
             </Link>

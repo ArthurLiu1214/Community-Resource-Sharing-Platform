@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Search, Map, Star, Home, PlusCircle, Bell, User, History } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -10,9 +9,13 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-              <Home size={24} className="text-white" />
-            </div>
+            {/* 使用自定義圖片 logo */}
+            <img 
+              src="/logo.png" 
+              alt="社區共享平台" 
+              className="w-8 h-8 object-contain"
+            />
+            
             <span className="text-xl font-bold text-gray-800">社區共享</span>
           </Link>
 
