@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Star, PlusCircle, History } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const PointsDisplay = () => {
   return (
@@ -31,14 +32,14 @@ const PointsDisplay = () => {
           <div className="text-center md:text-right">
             <h3 className="text-lg font-semibold mb-2">快速操作</h3>
             <div className="flex flex-col gap-2">
-              <button className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
+              <Link to="/list-item" className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
                 <PlusCircle size={16} />
                 上架物品
-              </button>
-              <button className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
+              </Link>
+              <Link to="/profile" className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
                 <History size={16} />
                 借用記錄
-              </button>
+              </Link>
             </div>
           </div>
         </div>

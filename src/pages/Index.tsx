@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { Search, Map, Star, Home, PlusCircle, Bell, User, History } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import ItemCard from '../components/ItemCard';
 import MapSection from '../components/MapSection';
@@ -10,6 +10,7 @@ import CategoryFilter from '../components/CategoryFilter';
 const Index = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   // 模擬物品資料
   const mockItems = [
@@ -93,10 +94,10 @@ const Index = () => {
                 className="w-full pl-10 pr-4 py-3 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-2 focus:ring-white/50"
               />
             </div>
-            <button className="bg-yellow-500 hover:bg-yellow-600 text-gray-800 px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
+            <Link to="/list-item" className="bg-yellow-500 hover:bg-yellow-600 text-gray-800 px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
               <PlusCircle size={20} />
               上架物品
-            </button>
+            </Link>
           </div>
         </div>
       </div>
