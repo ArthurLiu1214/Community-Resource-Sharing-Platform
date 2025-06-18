@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search, Star, Home, PlusCircle, Bell, User, History } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import PointsDisplay from '../components/PointsDisplay';
+import Footer from '../components/Footer';
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex flex-col">
       <Navbar />
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white py-16">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-400 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             社區物品共享平台
@@ -40,7 +41,7 @@ const Index = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 flex-1">
         {/* Points Display */}
         <PointsDisplay />
 
@@ -67,6 +68,8 @@ const Index = () => {
           </div>
         </section>
       </div>
+
+      <Footer />
     </div>
   );
 };

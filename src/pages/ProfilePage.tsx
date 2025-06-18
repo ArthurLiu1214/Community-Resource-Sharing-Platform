@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { User, Star, Package, History, Settings, Award, Calendar, MapPin, Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -28,10 +29,10 @@ const ProfilePage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex flex-col">
       <Navbar />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 flex-1">
         {/* Profile Header */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
           <div className="flex flex-col md:flex-row items-center gap-6">
@@ -39,7 +40,7 @@ const ProfilePage = () => {
               <User size={48} className="text-white" />
             </div>
             <div className="text-center md:text-left flex-1">
-              <h1 className="text-2xl font-bold text-gray-800 mb-2">張小明</h1>
+              <h1 className="text-2xl font-bold text-gray-800 mb-2">老闕</h1>
               <p className="text-gray-600 mb-4">優質社區成員 • 加入於 {userStats.memberSince}</p>
               <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                 <div className="flex items-center gap-2 bg-green-100 px-3 py-1 rounded-full">
@@ -207,6 +208,8 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

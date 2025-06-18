@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Map, Star, Home, PlusCircle, Bell, User } from 'lucide-react';
+import { useState } from 'react';
+import { Search, Star, Home, PlusCircle, Bell, User } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -42,7 +42,7 @@ const Navbar = () => {
               <Link 
                 to="/" 
                 className={`flex items-center gap-2 transition-colors ${
-                  location.pathname === '/' ? 'text-green-600' : 'text-gray-700 hover:text-green-600'
+                  location.pathname === '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
                 }`}
                 onClick={handleNavigation}
               >
@@ -57,12 +57,12 @@ const Navbar = () => {
               <Link 
                 to="/map" 
                 className={`flex items-center gap-2 transition-colors ${
-                  location.pathname === '/map' ? 'text-green-600' : 'text-gray-700 hover:text-green-600'
+                  location.pathname === '/map' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
                 }`}
                 onClick={handleNavigation}
               >
-                <Map size={20} />
-                地圖
+                <Search size={20} />
+                搜尋
               </Link>
             </motion.div>
             <motion.div
@@ -72,7 +72,7 @@ const Navbar = () => {
               <Link 
                 to="/list-item" 
                 className={`flex items-center gap-2 transition-colors ${
-                  location.pathname === '/list-item' ? 'text-green-600' : 'text-gray-700 hover:text-green-600'
+                  location.pathname === '/list-item' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
                 }`}
                 onClick={handleNavigation}
               >
@@ -89,7 +89,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <Bell size={24} className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors" />
+              <Bell size={24} className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors" />
               <motion.span 
                 className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
                 initial={{ scale: 0 }}
@@ -119,7 +119,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.9 }}
             >
               <Link to="/profile" onClick={handleNavigation}>
-                <User size={32} className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors" />
+                <User size={32} className="text-gray-700 hover:text-blue-600 cursor-pointer transition-colors" />
               </Link>
             </motion.div>
           </div>
@@ -136,7 +136,7 @@ const Navbar = () => {
             <Link 
               to="/" 
               className={`flex flex-col items-center p-2 transition-colors ${
-                location.pathname === '/' ? 'text-green-600' : 'text-gray-600 hover:text-green-600'
+                location.pathname === '/' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
               }`}
               onClick={handleNavigation}
             >
@@ -151,12 +151,12 @@ const Navbar = () => {
             <Link 
               to="/map" 
               className={`flex flex-col items-center p-2 transition-colors ${
-                location.pathname === '/map' ? 'text-green-600' : 'text-gray-600 hover:text-green-600'
+                location.pathname === '/map' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
               }`}
               onClick={handleNavigation}
             >
-              <Map size={20} />
-              <span className="text-xs mt-1">地圖</span>
+              <Search size={20} />
+              <span className="text-xs mt-1">搜尋</span>
             </Link>
           </motion.div>
           <motion.div
@@ -166,7 +166,7 @@ const Navbar = () => {
             <Link 
               to="/list-item" 
               className={`flex flex-col items-center p-2 transition-colors ${
-                location.pathname === '/list-item' ? 'text-green-600' : 'text-gray-600 hover:text-green-600'
+                location.pathname === '/list-item' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
               }`}
               onClick={handleNavigation}
             >
@@ -181,7 +181,7 @@ const Navbar = () => {
             <Link 
               to="/profile" 
               className={`flex flex-col items-center p-2 transition-colors ${
-                location.pathname === '/profile' ? 'text-green-600' : 'text-gray-600 hover:text-green-600'
+                location.pathname === '/profile' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
               }`}
               onClick={handleNavigation}
             >

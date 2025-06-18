@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search, Filter, MapPin, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import MapSection from '../components/MapSection';
+import Footer from '../components/Footer';
 
 const MapPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -157,10 +158,10 @@ const MapPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex flex-col">
       <Navbar />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 flex-1">
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">搜尋</h1>
           <p className="text-gray-600">探索您附近可借用的物品</p>
@@ -189,6 +190,8 @@ const MapPage = () => {
         {/* 使用與首頁相同的地圖組件 */}
         <MapSection items={mockItems} />
       </div>
+
+      <Footer />
     </div>
   );
 };

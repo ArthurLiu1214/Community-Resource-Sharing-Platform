@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Star, Map, ArrowLeft, User, Shield, Calendar, Package } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 
 const ItemDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [item, setItem] = useState<any>(null);
 
   // 完整的物品資料庫
   const itemsDatabase = {
@@ -241,8 +243,10 @@ const ItemDetailPage = () => {
     }
   };
 
-  // 根據 ID 獲取物品資料
-  const item = itemsDatabase[parseInt(id || '1') as keyof typeof itemsDatabase];
+  useEffect(() => {
+    const foundItem = itemsDatabase[parseInt(id || '1') as keyof typeof itemsDatabase];
+    setItem(foundItem || itemsDatabase[1]);
+  }, [id]);
 
   // 如果找不到物品，顯示錯誤
   if (!item) {
@@ -266,154 +270,109 @@ const ItemDetailPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex flex-col">
       <Navbar />
       
-      <div className="container mx-auto px-4 py-8">
-        <Button 
-          onClick={() => navigate(-1)}
-          className="mb-6 flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700"
-        >
-          <ArrowLeft size={20} />
-          返回
-        </Button>
+      <div className="container mx-auto px-4 py-8 flex-1">
+        <div className="max-w-4xl mx-auto">
+          <Button 
+            onClick={() => navigate(-1)}
+            className="mb-6 flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700"
+          >
+            <ArrowLeft size={20} />
+            返回
+          </Button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* 物品圖片和基本信息 */}
-          <div>
-            <Card>
-              <CardContent className="p-0">
-                <div className="relative h-64 md:h-80 lg:h-96 bg-white overflow-hidden rounded-t-lg">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-full object-contain"
-                  />
-                  <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    {item.category}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            {/* 物品圖片 */}
+            <div className="relative h-96 bg-white">
+              <img 
+                src={item.image} 
+                alt={item.title} 
+                className="w-full h-full object-contain"
+              />
+              <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                {item.category}
+              </div>
+            </div>
+
+            <div className="p-6">
+              {/* 物品標題和評分 */}
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h1 className="text-3xl font-bold text-gray-800 mb-2">{item.title}</h1>
+                  <p className="text-gray-600 text-lg">{item.description}</p>
+                </div>
+                <div className="text-right">
+                  <div className="flex items-center gap-1 mb-1">
+                    <Star size={20} className="text-yellow-500 fill-current" />
+                    <span className="text-xl font-bold text-gray-800">{item.rating}</span>
                   </div>
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-700 flex items-center gap-1">
-                    <Map size={14} />
-                    {item.distance}
+                  <p className="text-sm text-gray-600">({item.ownerRating}/100 擁有者評分)</p>
+                </div>
+              </div>
+
+              {/* 物品資訊 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Map size={16} className="text-gray-500" />
+                    <span className="text-gray-700">{item.distance} • {item.ownerLocation}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Package size={16} className="text-gray-500" />
+                    <span className="text-gray-700">最長借用 {item.borrowDuration}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar size={16} className="text-gray-500" />
+                    <span className="text-gray-700">押金 ${item.deposit}</span>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h1 className="text-3xl font-bold text-gray-800 mb-4">{item.title}</h1>
-                  <p className="text-gray-600 mb-4">{item.description}</p>
-                  
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div className="flex items-center gap-2">
-                      <Package size={16} className="text-gray-500" />
-                      <span className="text-sm text-gray-600">狀況：{item.condition}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar size={16} className="text-gray-500" />
-                      <span className="text-sm text-gray-600">可借用：{item.borrowDuration}</span>
-                    </div>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <User size={16} className="text-gray-500" />
+                    <span className="text-gray-700">擁有者：{item.owner}</span>
                   </div>
-
-                  <div className="flex justify-between items-center p-4 bg-blue-50 rounded-lg">
-                    <div>
-                      <div className="text-2xl font-bold text-blue-600">{item.points} 點數</div>
-                      <div className="text-sm text-gray-600">借用費用</div>
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-1 mb-1">
-                        <Star size={16} className="text-yellow-500 fill-current" />
-                        <span className="font-semibold">{item.rating}</span>
-                      </div>
-                      <div className="text-sm text-gray-600">物品評分</div>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <Shield size={16} className="text-gray-500" />
+                    <span className="text-gray-700">信譽分數：{item.ownerRating}/100</span>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
 
-          {/* 物主信息和借用選項 */}
-          <div className="space-y-6">
-            {/* 物主信息 */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <User size={20} />
-                  物主信息
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex items-center justify-center text-white text-xl font-semibold">
-                    {item.owner.charAt(0)}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold">{item.owner}</h3>
-                    <div className="flex items-center gap-1 mb-1">
-                      <Shield size={14} className="text-green-500" />
-                      <span className="text-sm text-gray-600">信譽分數：{item.ownerRating}/100</span>
-                    </div>
-                    <p className="text-sm text-gray-500">加入時間：{item.ownerJoinDate}</p>
-                    <p className="text-sm text-gray-500">位置：{item.ownerLocation}</p>
-                  </div>
-                </div>
-                
-                <div className="bg-gray-50 rounded-lg p-3 mb-4">
-                  <div className="text-sm font-semibold text-gray-700 mb-1">信譽等級進度</div>
-                  <div className="bg-gray-200 rounded-full h-2 mb-1">
-                    <div 
-                      className="bg-green-500 h-2 rounded-full" 
-                      style={{ width: `${item.ownerRating}%` }}
-                    ></div>
-                  </div>
-                  <div className="text-xs text-gray-500">優質等級</div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* 詳細描述 */}
-            <Card>
-              <CardHeader>
-                <CardTitle>詳細說明</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 leading-relaxed">{item.fullDescription}</p>
-              </CardContent>
-            </Card>
-
-            {/* 借用選項 */}
-            <Card>
-              <CardHeader>
-                <CardTitle>借用選項</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-sm font-semibold text-gray-700 mb-2 block">可借用日期</label>
-                    <div className="flex flex-wrap gap-2">
-                      {item.availableDates.map(date => (
-                        <span key={date} className="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm">
-                          {date}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                    <div className="text-sm font-semibold text-yellow-800 mb-1">押金資訊</div>
-                    <div className="text-sm text-yellow-700">需支付押金 ${item.deposit}，歸還時退還</div>
-                  </div>
-
+              {/* 借用按鈕 */}
+              <div className="border-t pt-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-2xl font-bold text-green-600">{item.points} 點數</div>
                   <Button 
                     onClick={handleBorrow}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-lg font-semibold"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-lg font-semibold rounded-lg transition-colors"
                   >
-                    申請借用
+                    立即借用
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
+          </div>
+
+          {/* 可用日期 */}
+          <div className="bg-white rounded-xl shadow-lg p-6 mt-6">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">可用日期</h3>
+            <div className="grid grid-cols-7 gap-2">
+              {item.availableDates.map(date => (
+                <span 
+                  key={date} 
+                  className="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm text-center"
+                >
+                  {date}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
