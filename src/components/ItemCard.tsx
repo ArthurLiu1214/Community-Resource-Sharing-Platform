@@ -38,11 +38,11 @@ const ItemCard: React.FC<ItemCardProps> = ({ item }) => {
       whileTap={{ scale: 0.98 }}
     >
       {/* Image */}
-      <div className="relative h-48 bg-gray-200 overflow-hidden">
+      <div className="relative h-48 bg-white overflow-hidden">
         <img 
           src={item.image} 
           alt={item.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
         <div className="absolute top-3 left-3 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
           {item.category}

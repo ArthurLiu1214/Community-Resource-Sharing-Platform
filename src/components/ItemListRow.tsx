@@ -39,11 +39,11 @@ const ItemListRow: React.FC<ItemListRowProps> = ({ item }) => {
     >
       <div className="flex gap-4 p-4">
         {/* Image */}
-        <div className="relative w-24 h-24 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+        <div className="relative w-24 h-24 bg-white rounded-lg overflow-hidden flex-shrink-0">
           <img 
             src={item.image} 
             alt={item.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
           <div className="absolute top-1 left-1 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
             {item.category}

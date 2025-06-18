@@ -283,11 +283,11 @@ const ItemDetailPage = () => {
           <div>
             <Card>
               <CardContent className="p-0">
-                <div className="relative h-96 bg-gray-200 overflow-hidden rounded-t-lg">
+                <div className="relative h-64 md:h-80 lg:h-96 bg-white overflow-hidden rounded-t-lg">
                   <img 
                     src={item.image} 
                     alt={item.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                   <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                     {item.category}
