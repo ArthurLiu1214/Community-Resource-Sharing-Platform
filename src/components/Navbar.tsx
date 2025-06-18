@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Search, Map, Star, Home, AddCircle, Notifications, AccountCircle, History } from 'lucide-react';
+import { Search, Map, Star, Home, PlusCircle, Bell, User, History } from 'lucide-react';
 
 const Navbar = () => {
   return (
@@ -30,7 +30,7 @@ const Navbar = () => {
               搜尋
             </a>
             <a href="#" className="flex items-center gap-2 text-gray-700 hover:text-green-600 transition-colors">
-              <AddCircle size={20} />
+              <PlusCircle size={20} />
               上架物品
             </a>
           </div>
@@ -38,7 +38,7 @@ const Navbar = () => {
           {/* User Section */}
           <div className="flex items-center space-x-4">
             <div className="relative">
-              <Notifications size={24} className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors" />
+              <Bell size={24} className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
             </div>
             <div className="flex items-center gap-2 bg-green-100 px-3 py-1 rounded-full">
@@ -48,7 +48,7 @@ const Navbar = () => {
             <div className="flex items-center gap-2 bg-blue-100 px-3 py-1 rounded-full">
               <span className="text-sm font-semibold text-blue-600">850 積分</span>
             </div>
-            <AccountCircle size={32} className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors" />
+            <User size={32} className="text-gray-700 hover:text-green-600 cursor-pointer transition-colors" />
           </div>
         </div>
       </div>
@@ -69,11 +69,11 @@ const Navbar = () => {
             <span className="text-xs mt-1">搜尋</span>
           </a>
           <a href="#" className="flex flex-col items-center p-2 text-gray-600 hover:text-green-600">
-            <AddCircle size={20} />
+            <PlusCircle size={20} />
             <span className="text-xs mt-1">上架</span>
           </a>
           <a href="#" className="flex flex-col items-center p-2 text-gray-600 hover:text-green-600">
-            <AccountCircle size={20} />
+            <User size={20} />
             <span className="text-xs mt-1">個人</span>
           </a>
         </div>

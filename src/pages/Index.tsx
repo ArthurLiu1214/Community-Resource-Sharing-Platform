@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Search, Map, Star, Home, AddCircle, Notifications, AccountCircle, History } from 'lucide-react';
+import { Search, Map, Star, Home, PlusCircle, Bell, User, History } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import ItemCard from '../components/ItemCard';
 import MapSection from '../components/MapSection';
@@ -94,7 +94,7 @@ const Index = () => {
               />
             </div>
             <button className="bg-yellow-500 hover:bg-yellow-600 text-gray-800 px-8 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2">
-              <AddCircle size={20} />
+              <PlusCircle size={20} />
               上架物品
             </button>
           </div>
