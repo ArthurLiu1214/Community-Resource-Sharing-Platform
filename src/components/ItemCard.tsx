@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { Star, Map } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 interface ItemCardProps {
   item: {
@@ -26,7 +26,17 @@ const ItemCard: React.FC<ItemCardProps> = ({ item }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+    <motion.div 
+      className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ 
+        scale: 1.02,
+        transition: { duration: 0.2 }
+      }}
+      whileTap={{ scale: 0.98 }}
+    >
       {/* Image */}
       <div className="relative h-48 bg-gray-200 overflow-hidden">
         <img 
@@ -73,15 +83,17 @@ const ItemCard: React.FC<ItemCardProps> = ({ item }) => {
               </div>
             </div>
           </div>
-          <button 
+          <motion.button 
             onClick={handleBorrowClick}
             className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             借用
-          </button>
+          </motion.button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

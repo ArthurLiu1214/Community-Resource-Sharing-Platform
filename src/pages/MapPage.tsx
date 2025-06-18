@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { Search, Filter, MapPin, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import CategoryFilter from '../components/CategoryFilter';
 import MapSection from '../components/MapSection';
 
 const MapPage = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -17,7 +15,7 @@ const MapPage = () => {
       title: "電動螺絲起子",
       category: "工具",
       image: "/images/items/drill.jpg",
-      distance: "0.2km",
+      distance: "0.1km",
       points: 30,
       rating: 4.8,
       owner: "王小明",
@@ -29,7 +27,7 @@ const MapPage = () => {
       title: "氣炸鍋",
       category: "廚具",
       image: "/images/items/air-fryer.jpg",
-      distance: "0.5km",
+      distance: "0.3km",
       points: 50,
       rating: 4.9,
       owner: "李小華",
@@ -41,7 +39,7 @@ const MapPage = () => {
       title: "瑜伽墊",
       category: "運動用品",
       image: "/images/items/yoga-mat.jpg",
-      distance: "0.3km",
+      distance: "0.2km",
       points: 15,
       rating: 4.7,
       owner: "陳美美",
@@ -53,7 +51,7 @@ const MapPage = () => {
       title: "除濕機",
       category: "家電",
       image: "/images/items/dehumidifier.jpg",
-      distance: "0.8km",
+      distance: "0.5km",
       points: 80,
       rating: 4.6,
       owner: "張大哥",
@@ -89,7 +87,7 @@ const MapPage = () => {
       title: "電動腳踏車",
       category: "交通工具",
       image: "/images/items/e-bike.jpg",
-      distance: "0.7km",
+      distance: "0.8km",
       points: 200,
       rating: 4.7,
       owner: "黃先生",
@@ -101,7 +99,7 @@ const MapPage = () => {
       title: "咖啡機",
       category: "廚具",
       image: "/images/items/coffee-machine.jpg",
-      distance: "0.3km",
+      distance: "0.2km",
       points: 60,
       rating: 4.8,
       owner: "吳小姐",
@@ -113,7 +111,7 @@ const MapPage = () => {
       title: "健身器材組合",
       category: "運動用品",
       image: "/images/items/fitness-equipment.jpg",
-      distance: "0.9km",
+      distance: "0.7km",
       points: 150,
       rating: 4.6,
       owner: "劉先生",
@@ -125,7 +123,7 @@ const MapPage = () => {
       title: "掃地機器人",
       category: "家電",
       image: "/images/items/robot-vacuum.jpg",
-      distance: "0.5km",
+      distance: "0.3km",
       points: 100,
       rating: 4.9,
       owner: "楊小姐",
@@ -149,7 +147,7 @@ const MapPage = () => {
       title: "烤肉架",
       category: "戶外用品",
       image: "/images/items/bbq-grill.jpg",
-      distance: "0.6km",
+      distance: "0.5km",
       points: 40,
       rating: 4.4,
       owner: "鄭先生",
@@ -158,19 +156,13 @@ const MapPage = () => {
     }
   ];
 
-  const filteredItems = mockItems.filter(item => {
-    const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
-    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
       <Navbar />
       
       <div className="container mx-auto px-4 py-8">
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">社區地圖</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">搜尋</h1>
           <p className="text-gray-600">探索您附近可借用的物品</p>
         </div>
 
@@ -194,39 +186,8 @@ const MapPage = () => {
           </div>
         </div>
 
-        <CategoryFilter activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
-
         {/* 使用與首頁相同的地圖組件 */}
         <MapSection items={mockItems} />
-
-        {/* Item List */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">地圖上的物品 ({filteredItems.length})</h2>
-          <div className="space-y-4">
-            {filteredItems.map(item => (
-              <div key={item.id} className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-                <div className="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <MapPin size={20} className="text-gray-600" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-gray-800">{item.title}</h3>
-                  <p className="text-sm text-gray-600">{item.category} • {item.distance}</p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <Star size={14} className="text-yellow-500" />
-                    <span className="text-sm text-gray-600">{item.rating}</span>
-                    <span className="text-sm text-blue-600 font-semibold">{item.points} 點數</span>
-                  </div>
-                </div>
-                <button 
-                  onClick={() => navigate(`/item/${item.id}`)}
-                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-                >
-                  查看詳情
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );

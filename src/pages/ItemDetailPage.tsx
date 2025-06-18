@@ -16,7 +16,7 @@ const ItemDetailPage = () => {
       title: "電動螺絲起子",
       category: "工具",
       image: "/images/items/drill.jpg",
-      distance: "0.2km",
+      distance: "0.1km",
       points: 30,
       rating: 4.8,
       owner: "王小明",
@@ -27,7 +27,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-17"],
       borrowDuration: "1-3天",
       deposit: 500,
-      ownerLocation: "台北市大安區",
+      ownerLocation: "中原大學正門附近",
       ownerJoinDate: "2023年3月"
     },
     2: {
@@ -35,7 +35,7 @@ const ItemDetailPage = () => {
       title: "氣炸鍋",
       category: "廚具",
       image: "/images/items/air-fryer.jpg",
-      distance: "0.5km",
+      distance: "0.3km",
       points: 50,
       rating: 4.9,
       owner: "李小華",
@@ -46,7 +46,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-18", "2024-01-19"],
       borrowDuration: "1-7天",
       deposit: 800,
-      ownerLocation: "台北市信義區",
+      ownerLocation: "中原夜市附近",
       ownerJoinDate: "2023年1月"
     },
     3: {
@@ -54,7 +54,7 @@ const ItemDetailPage = () => {
       title: "瑜伽墊",
       category: "運動用品",
       image: "/images/items/yoga-mat.jpg",
-      distance: "0.3km",
+      distance: "0.2km",
       points: 15,
       rating: 4.7,
       owner: "陳美美",
@@ -65,7 +65,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-20"],
       borrowDuration: "1-14天",
       deposit: 200,
-      ownerLocation: "台北市松山區",
+      ownerLocation: "中原大學體育館附近",
       ownerJoinDate: "2023年6月"
     },
     4: {
@@ -73,7 +73,7 @@ const ItemDetailPage = () => {
       title: "除濕機",
       category: "家電",
       image: "/images/items/dehumidifier.jpg",
-      distance: "0.8km",
+      distance: "0.5km",
       points: 80,
       rating: 4.6,
       owner: "張大哥",
@@ -84,7 +84,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-21"],
       borrowDuration: "1-30天",
       deposit: 1200,
-      ownerLocation: "台北市中山區",
+      ownerLocation: "中原商圈",
       ownerJoinDate: "2022年11月"
     },
     5: {
@@ -103,7 +103,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-18", "2024-01-19"],
       borrowDuration: "1-7天",
       deposit: 2000,
-      ownerLocation: "台北市內湖區",
+      ownerLocation: "中原大學圖書館附近",
       ownerJoinDate: "2023年4月"
     },
     6: {
@@ -122,7 +122,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-22"],
       borrowDuration: "1-14天",
       deposit: 800,
-      ownerLocation: "台北市文山區",
+      ownerLocation: "中原大學後山附近",
       ownerJoinDate: "2023年2月"
     },
     7: {
@@ -130,7 +130,7 @@ const ItemDetailPage = () => {
       title: "電動腳踏車",
       category: "交通工具",
       image: "/images/items/e-bike.jpg",
-      distance: "0.7km",
+      distance: "0.8km",
       points: 200,
       rating: 4.7,
       owner: "黃先生",
@@ -141,7 +141,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-23"],
       borrowDuration: "1-7天",
       deposit: 3000,
-      ownerLocation: "台北市南港區",
+      ownerLocation: "中原大學側門附近",
       ownerJoinDate: "2022年8月"
     },
     8: {
@@ -149,7 +149,7 @@ const ItemDetailPage = () => {
       title: "咖啡機",
       category: "廚具",
       image: "/images/items/coffee-machine.jpg",
-      distance: "0.3km",
+      distance: "0.2km",
       points: 60,
       rating: 4.8,
       owner: "吳小姐",
@@ -160,7 +160,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-20"],
       borrowDuration: "1-7天",
       deposit: 1000,
-      ownerLocation: "台北市松山區",
+      ownerLocation: "中原大學宿舍區",
       ownerJoinDate: "2023年5月"
     },
     9: {
@@ -168,7 +168,7 @@ const ItemDetailPage = () => {
       title: "健身器材組合",
       category: "運動用品",
       image: "/images/items/fitness-equipment.jpg",
-      distance: "0.9km",
+      distance: "0.7km",
       points: 150,
       rating: 4.6,
       owner: "劉先生",
@@ -179,7 +179,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-24"],
       borrowDuration: "1-30天",
       deposit: 1500,
-      ownerLocation: "台北市士林區",
+      ownerLocation: "中原大學操場附近",
       ownerJoinDate: "2023年1月"
     },
     10: {
@@ -187,7 +187,7 @@ const ItemDetailPage = () => {
       title: "掃地機器人",
       category: "家電",
       image: "/images/items/robot-vacuum.jpg",
-      distance: "0.5km",
+      distance: "0.3km",
       points: 100,
       rating: 4.9,
       owner: "楊小姐",
@@ -198,7 +198,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-18", "2024-01-19"],
       borrowDuration: "1-7天",
       deposit: 1500,
-      ownerLocation: "台北市信義區",
+      ownerLocation: "中原大學工學院附近",
       ownerJoinDate: "2023年3月"
     },
     11: {
@@ -217,7 +217,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-25"],
       borrowDuration: "1-7天",
       deposit: 5000,
-      ownerLocation: "台北市大安區",
+      ownerLocation: "中原大學商學院附近",
       ownerJoinDate: "2022年12月"
     },
     12: {
@@ -225,7 +225,7 @@ const ItemDetailPage = () => {
       title: "烤肉架",
       category: "戶外用品",
       image: "/images/items/bbq-grill.jpg",
-      distance: "0.6km",
+      distance: "0.5km",
       points: 40,
       rating: 4.4,
       owner: "鄭先生",
@@ -236,7 +236,7 @@ const ItemDetailPage = () => {
       availableDates: ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-26"],
       borrowDuration: "1-3天",
       deposit: 500,
-      ownerLocation: "台北市文山區",
+      ownerLocation: "中原大學後山附近",
       ownerJoinDate: "2022年10月"
     }
   };

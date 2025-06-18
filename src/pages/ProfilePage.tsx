@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
-import { User, Star, Package, History, Settings, Award, Calendar, MapPin } from 'lucide-react';
+import { User, Star, Package, History, Settings, Award, Calendar, MapPin, Share2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
 const ProfilePage = () => {
@@ -44,14 +44,14 @@ const ProfilePage = () => {
               <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                 <div className="flex items-center gap-2 bg-green-100 px-3 py-1 rounded-full">
                   <Star size={16} className="text-yellow-500" />
-                  <span className="text-sm font-semibold text-gray-700">{userStats.creditScore}</span>
+                  <span className="text-sm font-semibold text-gray-700">4.8</span>
                 </div>
                 <div className="flex items-center gap-2 bg-blue-100 px-3 py-1 rounded-full">
-                  <span className="text-sm font-semibold text-blue-600">{userStats.totalPoints} 積分</span>
+                  <span className="text-sm font-semibold text-blue-600">{userStats.totalPoints} 點數</span>
                 </div>
                 <div className="flex items-center gap-2 bg-purple-100 px-3 py-1 rounded-full">
-                  <Award size={16} className="text-purple-600" />
-                  <span className="text-sm font-semibold text-purple-600">優質等級</span>
+                  <Award size={16} className="text-yellow-500" />
+                  <span className="text-sm font-semibold text-purple-600">95/100</span>
                 </div>
               </div>
             </div>
@@ -75,13 +75,13 @@ const ProfilePage = () => {
             <div className="text-sm text-gray-600">借用次數</div>
           </div>
           <div className="bg-white rounded-xl shadow-lg p-4 text-center">
-            <Star size={24} className="text-purple-600 mx-auto mb-2" />
+            <Share2 size={24} className="text-purple-600 mx-auto mb-2" />
             <div className="text-2xl font-bold text-gray-800">{userStats.totalLends}</div>
             <div className="text-sm text-gray-600">出借次數</div>
           </div>
           <div className="bg-white rounded-xl shadow-lg p-4 text-center">
-            <Award size={24} className="text-orange-600 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-gray-800">{userStats.creditScore}</div>
+            <Award size={24} className="text-yellow-500 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-gray-800">95/100</div>
             <div className="text-sm text-gray-600">信譽分數</div>
           </div>
         </div>
@@ -135,7 +135,7 @@ const ProfilePage = () => {
                         <div className="text-sm text-gray-600">{activity.user} • {activity.date}</div>
                       </div>
                       <div className={`font-semibold ${activity.points.startsWith('+') ? 'text-green-600' : 'text-blue-600'}`}>
-                        {activity.points} 積分
+                        {activity.points} 點數
                       </div>
                     </div>
                   ))}
@@ -147,9 +147,9 @@ const ProfilePage = () => {
               <div>
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-lg font-semibold text-gray-800">我的物品</h3>
-                  <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                  <Link to="/list-item" className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
                     新增物品
-                  </button>
+                  </Link>
                 </div>
                 <div className="space-y-4">
                   {myItems.map(item => (
@@ -194,7 +194,7 @@ const ProfilePage = () => {
                         </div>
                       </div>
                       <div className={`font-semibold ${activity.points.startsWith('+') ? 'text-green-600' : 'text-blue-600'}`}>
-                        {activity.points} 積分
+                        {activity.points} 點數
                       </div>
                       <button className="px-4 py-2 text-blue-600 hover:text-blue-800 transition-colors">
                         查看詳情

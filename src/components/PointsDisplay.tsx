@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, PlusCircle, History } from 'lucide-react';
+import { Star, PlusCircle, History, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const PointsDisplay = () => {
@@ -17,7 +17,7 @@ const PointsDisplay = () => {
           {/* Credit Score */}
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-2 flex items-center justify-center gap-2">
-              <Star size={20} />
+              <Award size={20} />
               信譽等級
             </h3>
             <div className="text-2xl font-bold mb-2">優質等級</div>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Upload, Camera, MapPin, Calendar, DollarSign } from 'lucide-react';
 import Navbar from '../components/Navbar';
@@ -141,7 +140,7 @@ const ListItemPage = () => {
               <h3 className="text-lg font-semibold text-gray-800 mb-4">借用條件設定</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">所需積分</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">所需點數</label>
                   <input
                     type="number"
                     name="points"

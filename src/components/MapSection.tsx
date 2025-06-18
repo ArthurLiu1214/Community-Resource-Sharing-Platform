@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Map, Navigation, Filter } from 'lucide-react';
+import { Map, Navigation, Filter, Wrench, Utensils, Dumbbell, Monitor, Camera, Tent, Bike, Grid, List, SlidersHorizontal } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import ItemCard from './ItemCard';
+import ItemListRow from './ItemListRow';
 
 // 修復 Leaflet 圖標問題
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -28,24 +30,26 @@ interface MapSectionProps {
 
 const MapSection: React.FC<MapSectionProps> = ({ items }) => {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [mapCenter, setMapCenter] = useState<[number, number]>([25.0330, 121.5654]); // 台北市中心
+  const [mapCenter, setMapCenter] = useState<[number, number]>([24.9569, 121.2409]); // 中原大學座標
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const navigate = useNavigate();
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [sortBy, setSortBy] = useState('distance');
 
-  // 模擬物品位置（實際應用中應該從後端獲取）
+  // 模擬物品位置（中原大學校園周遭 - 分散分布）
   const itemLocations = [
-    { id: 1, position: [25.0330, 121.5654], category: "工具" },
-    { id: 2, position: [25.0340, 121.5664], category: "廚具" },
-    { id: 3, position: [25.0320, 121.5644], category: "運動用品" },
-    { id: 4, position: [25.0350, 121.5674], category: "家電" },
-    { id: 5, position: [25.0335, 121.5660], category: "電子設備" },
-    { id: 6, position: [25.0345, 121.5650], category: "戶外用品" },
-    { id: 7, position: [25.0325, 121.5670], category: "交通工具" },
-    { id: 8, position: [25.0338, 121.5648], category: "廚具" },
-    { id: 9, position: [25.0355, 121.5668], category: "運動用品" },
-    { id: 10, position: [25.0342, 121.5672], category: "家電" },
-    { id: 11, position: [25.0332, 121.5658], category: "電子設備" },
-    { id: 12, position: [25.0348, 121.5652], category: "戶外用品" },
+    { id: 1, position: [24.9569, 121.2408], category: "工具" }, // 中原大學正門
+    { id: 2, position: [24.9595, 121.2435], category: "廚具" }, // 中原夜市東北
+    { id: 3, position: [24.9563, 121.2402], category: "運動用品" }, // 中原大學體育館
+    { id: 4, position: [24.9588, 121.2440], category: "家電" }, // 中原商圈東北
+    { id: 5, position: [24.9572, 121.2410], category: "電子設備" }, // 中原大學圖書館
+    { id: 6, position: [24.9545, 121.2385], category: "戶外用品" }, // 中原大學後山西南
+    { id: 7, position: [24.9550, 121.2420], category: "交通工具" }, // 中原大學東南側
+    { id: 8, position: [24.9600, 121.2415], category: "廚具" }, // 中原夜市西北
+    { id: 9, position: [24.9598, 121.2445], category: "運動用品" }, // 中原大學操場東北
+    { id: 10, position: [24.9565, 121.2398], category: "家電" }, // 中原大學宿舍區西南
+    { id: 11, position: [24.9580, 121.2405], category: "電子設備" }, // 中原大學工學院西北
+    { id: 12, position: [24.9578, 121.2438], category: "戶外用品" }, // 中原大學商學院東北
   ];
 
   // 獲取用戶位置
@@ -64,7 +68,25 @@ const MapSection: React.FC<MapSectionProps> = ({ items }) => {
     }
   }, []);
 
-  // 過濾物品
+  // 篩選和排序邏輯
+  const filteredItems = items.filter(item => {
+    if (activeCategory === 'all') return true;
+    return item.category === activeCategory;
+  }).sort((a, b) => {
+    switch (sortBy) {
+      case 'distance':
+        return parseFloat(a.distance) - parseFloat(b.distance);
+      case 'points':
+        return a.points - b.points;
+      case 'rating':
+        return b.rating - a.rating;
+      case 'newest':
+        return b.id - a.id;
+      default:
+        return 0;
+    }
+  });
+
   const filteredLocations = itemLocations.filter(location => {
     if (activeCategory === 'all') return true;
     return location.category === activeCategory;
@@ -93,6 +115,28 @@ const MapSection: React.FC<MapSectionProps> = ({ items }) => {
   // 處理借用物品按鈕點擊
   const handleBorrowClick = (itemId: number) => {
     navigate(`/item/${itemId}`);
+  };
+
+  // 分類圖示映射
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case '工具':
+        return <Wrench size={16} />;
+      case '廚具':
+        return <Utensils size={16} />;
+      case '運動用品':
+        return <Dumbbell size={16} />;
+      case '家電':
+        return <Monitor size={16} />;
+      case '電子設備':
+        return <Camera size={16} />;
+      case '戶外用品':
+        return <Tent size={16} />;
+      case '交通工具':
+        return <Bike size={16} />;
+      default:
+        return <Filter size={16} />;
+    }
   };
 
   return (
@@ -180,96 +224,184 @@ const MapSection: React.FC<MapSectionProps> = ({ items }) => {
           </div>
         </div>
 
-        {/* 地圖控制面板 */}
+        {/* 物品分類篩選面板 */}
         <div className="p-4 bg-gray-50 border-t">
           <div className="flex items-center gap-2 mb-3">
             <Filter size={16} className="text-gray-600" />
-            <span className="text-sm font-medium text-gray-700">篩選類別：</span>
+            <span className="text-sm font-medium text-gray-700">物品分類篩選：</span>
           </div>
           <div className="flex flex-wrap gap-2">
             <button 
               onClick={() => setActiveCategory('all')}
-              className={`px-3 py-1 rounded-full text-sm transition-colors ${
+              className={`px-3 py-2 rounded-lg text-sm transition-colors flex items-center gap-2 ${
                 activeCategory === 'all' 
                   ? 'bg-blue-100 text-blue-600 border border-blue-200' 
                   : 'bg-white border border-gray-200 hover:bg-gray-50'
               }`}
             >
-              全部
+              <Filter size={16} />
+              全部 ({items.length})
             </button>
             <button 
               onClick={() => setActiveCategory('工具')}
-              className={`px-3 py-1 rounded-full text-sm transition-colors ${
+              className={`px-3 py-2 rounded-lg text-sm transition-colors flex items-center gap-2 ${
                 activeCategory === '工具' 
                   ? 'bg-red-100 text-red-600 border border-red-200' 
                   : 'bg-white border border-gray-200 hover:bg-gray-50'
               }`}
             >
-              工具
+              <Wrench size={16} />
+              工具 ({items.filter(item => item.category === '工具').length})
             </button>
             <button 
               onClick={() => setActiveCategory('廚具')}
-              className={`px-3 py-1 rounded-full text-sm transition-colors ${
+              className={`px-3 py-2 rounded-lg text-sm transition-colors flex items-center gap-2 ${
                 activeCategory === '廚具' 
                   ? 'bg-blue-100 text-blue-600 border border-blue-200' 
                   : 'bg-white border border-gray-200 hover:bg-gray-50'
               }`}
             >
-              廚具
+              <Utensils size={16} />
+              廚具 ({items.filter(item => item.category === '廚具').length})
             </button>
             <button 
               onClick={() => setActiveCategory('家電')}
-              className={`px-3 py-1 rounded-full text-sm transition-colors ${
+              className={`px-3 py-2 rounded-lg text-sm transition-colors flex items-center gap-2 ${
                 activeCategory === '家電' 
                   ? 'bg-purple-100 text-purple-600 border border-purple-200' 
                   : 'bg-white border border-gray-200 hover:bg-gray-50'
               }`}
             >
-              家電
+              <Monitor size={16} />
+              家電 ({items.filter(item => item.category === '家電').length})
             </button>
             <button 
               onClick={() => setActiveCategory('運動用品')}
-              className={`px-3 py-1 rounded-full text-sm transition-colors ${
+              className={`px-3 py-2 rounded-lg text-sm transition-colors flex items-center gap-2 ${
                 activeCategory === '運動用品' 
                   ? 'bg-green-100 text-green-600 border border-green-200' 
                   : 'bg-white border border-gray-200 hover:bg-gray-50'
               }`}
             >
-              運動用品
+              <Dumbbell size={16} />
+              運動用品 ({items.filter(item => item.category === '運動用品').length})
             </button>
             <button 
               onClick={() => setActiveCategory('電子設備')}
-              className={`px-3 py-1 rounded-full text-sm transition-colors ${
+              className={`px-3 py-2 rounded-lg text-sm transition-colors flex items-center gap-2 ${
                 activeCategory === '電子設備' 
                   ? 'bg-yellow-100 text-yellow-600 border border-yellow-200' 
                   : 'bg-white border border-gray-200 hover:bg-gray-50'
               }`}
             >
-              電子設備
+              <Camera size={16} />
+              電子設備 ({items.filter(item => item.category === '電子設備').length})
             </button>
             <button 
               onClick={() => setActiveCategory('戶外用品')}
-              className={`px-3 py-1 rounded-full text-sm transition-colors ${
+              className={`px-3 py-2 rounded-lg text-sm transition-colors flex items-center gap-2 ${
                 activeCategory === '戶外用品' 
                   ? 'bg-cyan-100 text-cyan-600 border border-cyan-200' 
                   : 'bg-white border border-gray-200 hover:bg-gray-50'
               }`}
             >
-              戶外用品
+              <Tent size={16} />
+              戶外用品 ({items.filter(item => item.category === '戶外用品').length})
             </button>
             <button 
               onClick={() => setActiveCategory('交通工具')}
-              className={`px-3 py-1 rounded-full text-sm transition-colors ${
+              className={`px-3 py-2 rounded-lg text-sm transition-colors flex items-center gap-2 ${
                 activeCategory === '交通工具' 
                   ? 'bg-lime-100 text-lime-600 border border-lime-200' 
                   : 'bg-white border border-gray-200 hover:bg-gray-50'
               }`}
             >
-              交通工具
+              <Bike size={16} />
+              交通工具 ({items.filter(item => item.category === '交通工具').length})
             </button>
           </div>
         </div>
+
+        {/* 篩選結果統計 */}
+        <div className="px-4 py-3 bg-white border-t border-gray-100">
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-600">
+              顯示 {filteredItems.length} 件物品
+              {activeCategory !== 'all' && ` (${activeCategory}類別)`}
+            </span>
+            <span className="text-xs text-gray-500">
+              點擊地圖標記或下方卡片查看詳情
+            </span>
+          </div>
+        </div>
       </div>
+
+      {/* 下方物品列表 */}
+      {filteredItems.length > 0 && (
+        <div className="mt-6 bg-white rounded-xl shadow-lg p-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+            <h3 className="text-lg font-semibold text-gray-800">
+              地圖物品列表 {activeCategory !== 'all' && `- ${activeCategory}`}
+            </h3>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
+                <SlidersHorizontal size={16} className="text-gray-600" />
+                <select 
+                  value={sortBy} 
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
+                >
+                  <option value="distance">距離排序</option>
+                  <option value="points">點數排序</option>
+                  <option value="rating">評分排序</option>
+                  <option value="newest">最新上架</option>
+                </select>
+              </div>
+              <div className="flex gap-2">
+                <button 
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-600'}`}
+                  title="網格檢視"
+                >
+                  <Grid size={20} />
+                </button>
+                <button 
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-600'}`}
+                  title="列表檢視"
+                >
+                  <List size={20} />
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          {viewMode === 'grid' ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredItems.map(item => (
+                <ItemCard key={item.id} item={item} />
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {filteredItems.map(item => (
+                <ItemListRow key={item.id} item={item} />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* 無結果提示 */}
+      {filteredItems.length === 0 && (
+        <div className="mt-6 bg-white rounded-xl shadow-lg p-8 text-center">
+          <div className="text-gray-400 text-4xl mb-4">🔍</div>
+          <h3 className="text-lg font-semibold text-gray-600 mb-2">
+            沒有找到 {activeCategory !== 'all' ? activeCategory : ''} 類別的物品
+          </h3>
+          <p className="text-gray-500">請嘗試選擇其他分類或查看全部物品</p>
+        </div>
+      )}
     </section>
   );
 };
