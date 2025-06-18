@@ -9,6 +9,7 @@ import MapPage from "./pages/MapPage";
 import SearchPage from "./pages/SearchPage";
 import ListItemPage from "./pages/ListItemPage";
 import ProfilePage from "./pages/ProfilePage";
+import ItemDetailPage from "./pages/ItemDetailPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/search" element={<SearchPage />} />
           <Route path="/list-item" element={<ListItemPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/item/:id" element={<ItemDetailPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -10,7 +10,7 @@ const PointsDisplay = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Current Points */}
           <div className="text-center md:text-left">
-            <h3 className="text-lg font-semibold mb-2">我的積分</h3>
+            <h3 className="text-lg font-semibold mb-2">我的點數</h3>
             <div className="text-4xl font-bold mb-2">850</div>
             <p className="opacity-90 text-sm">可兌換中高價值物品</p>
           </div>
@@ -25,18 +25,18 @@ const PointsDisplay = () => {
             <div className="bg-white/20 rounded-full h-2 mb-2">
               <div className="bg-yellow-400 h-2 rounded-full w-4/5"></div>
             </div>
-            <p className="opacity-90 text-sm">信譽分數：420/500</p>
+            <p className="opacity-90 text-sm">信譽分數：80/100</p>
           </div>
 
           {/* Quick Actions */}
           <div className="text-center md:text-right">
             <h3 className="text-lg font-semibold mb-2">快速操作</h3>
             <div className="flex flex-col gap-2">
-              <Link to="/list-item" className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
+              <Link to="/list-item" className="bg-white/20 hover:bg-white/30 px-3 py-2 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm">
                 <PlusCircle size={16} />
                 上架物品
               </Link>
-              <Link to="/profile" className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
+              <Link to="/profile" className="bg-white/20 hover:bg-white/30 px-3 py-2 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm">
                 <History size={16} />
                 借用記錄
               </Link>
@@ -46,23 +46,23 @@ const PointsDisplay = () => {
 
         {/* Points Earning Tips */}
         <div className="mt-6 pt-6 border-t border-white/20">
-          <h4 className="font-semibold mb-3">獲得積分方式：</h4>
+          <h4 className="font-semibold mb-3">獲得點數方式：</h4>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
             <div className="bg-white/10 rounded-lg p-3">
               <div className="font-semibold">上架物品</div>
-              <div className="opacity-90">+10-50 積分</div>
+              <div className="opacity-90">+10-50 點數</div>
             </div>
             <div className="bg-white/10 rounded-lg p-3">
               <div className="font-semibold">成功出借</div>
-              <div className="opacity-90">+20-100 積分</div>
+              <div className="opacity-90">+20-100 點數</div>
             </div>
             <div className="bg-white/10 rounded-lg p-3">
               <div className="font-semibold">準時歸還</div>
-              <div className="opacity-90">+10 積分</div>
+              <div className="opacity-90">+10 點數</div>
             </div>
             <div className="bg-white/10 rounded-lg p-3">
               <div className="font-semibold">鄰居推薦</div>
-              <div className="opacity-90">+50 積分</div>
+              <div className="opacity-90">+50 點數</div>
             </div>
           </div>
         </div>

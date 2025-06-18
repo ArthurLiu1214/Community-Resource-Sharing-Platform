@@ -1,12 +1,14 @@
 
 import React, { useState } from 'react';
 import { Search, Filter, MapPin, Star } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import CategoryFilter from '../components/CategoryFilter';
 
 const MapPage = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   // 模擬地圖上的物品標記
   const mapItems = [
@@ -15,6 +17,10 @@ const MapPage = () => {
     { id: 3, title: "瑜伽墊", category: "運動用品", lat: 25.0320, lng: 121.5664, points: 15, rating: 4.7, distance: "0.3km" },
     { id: 4, title: "除濕機", category: "家電", lat: 25.0350, lng: 121.5634, points: 80, rating: 4.6, distance: "0.8km" }
   ];
+
+  const handleItemClick = (itemId: number) => {
+    navigate(`/item/${itemId}`);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
@@ -59,13 +65,13 @@ const MapPage = () => {
             
             {/* 模擬地圖標記 */}
             <div className="absolute top-1/4 left-1/3 bg-red-500 text-white px-2 py-1 rounded-full text-xs">
-              電動螺絲起子 (30積分)
+              電動螺絲起子 (30點數)
             </div>
             <div className="absolute top-1/2 right-1/3 bg-blue-500 text-white px-2 py-1 rounded-full text-xs">
-              氣炸鍋 (50積分)
+              氣炸鍋 (50點數)
             </div>
             <div className="absolute bottom-1/3 left-1/4 bg-purple-500 text-white px-2 py-1 rounded-full text-xs">
-              瑜伽墊 (15積分)
+              瑜伽墊 (15點數)
             </div>
           </div>
         </div>
@@ -85,10 +91,13 @@ const MapPage = () => {
                   <div className="flex items-center gap-2 mt-1">
                     <Star size={14} className="text-yellow-500" />
                     <span className="text-sm text-gray-600">{item.rating}</span>
-                    <span className="text-sm text-blue-600 font-semibold">{item.points} 積分</span>
+                    <span className="text-sm text-blue-600 font-semibold">{item.points} 點數</span>
                   </div>
                 </div>
-                <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                <button 
+                  onClick={() => handleItemClick(item.id)}
+                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                >
                   查看詳情
                 </button>
               </div>
