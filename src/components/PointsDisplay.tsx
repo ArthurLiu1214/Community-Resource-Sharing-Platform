@@ -53,7 +53,7 @@ const PointsDisplay = () => {
             </div>
             <div className="bg-white/10 rounded-lg p-3">
               <div className="font-semibold">成功出借</div>
-              <div className="opacity-90">+20-100 點數</div>
+              <div className="opacity-90">+20 以上 點數</div>
             </div>
             <div className="bg-white/10 rounded-lg p-3">
               <div className="font-semibold">使用評價</div>
