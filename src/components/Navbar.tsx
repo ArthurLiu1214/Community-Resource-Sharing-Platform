@@ -24,7 +24,7 @@ const Navbar = () => {
             <Link to="/" className="flex items-center space-x-2">
               {/* 使用自定義圖片 logo */}
               <img 
-                src="/logo.png" 
+                src={`${import.meta.env.BASE_URL}logo.png`} 
                 alt="社區共享平台" 
                 className="w-8 h-8 object-contain"
               />
