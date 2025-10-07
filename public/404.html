@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>404</title>
+    <meta http-equiv="refresh" content="0; url=./" />
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+  <script>
+    // Preserve client-side routing path for SPA on GitHub Pages
+    (function() {
+      var redirect = sessionStorage.getItem('gh:spa-redirect');
+      if (!redirect) {
+        var l = window.location;
+        sessionStorage.setItem('gh:spa-redirect', l.pathname.replace(/\/[^/]*$/, '/'));
+      }
+    })();
+  </script>
+</html>
+
+
+
